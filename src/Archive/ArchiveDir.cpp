@@ -313,8 +313,9 @@ bool ArchiveDir::addEntry(shared_ptr<ArchiveEntry> entry, bool ignore_requiremen
 		entries_.insert(entries_.begin() + index, entry); // Add it at index
 
 	// Check entry name if duplicate names aren't allowed
-	if (!ignore_requirements && !allow_duplicate_names_)
-		ensureUniqueName(entry.get());
+	// Actually nah never do this
+	/* if (!ignore_requirements && !allow_duplicate_names_)
+		ensureUniqueName(entry.get()); */
 
 	return true;
 }

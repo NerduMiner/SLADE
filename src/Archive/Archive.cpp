@@ -1235,8 +1235,9 @@ bool Archive::renameEntry(ArchiveEntry* entry, string_view name, bool force)
 	auto fmt_desc = formatDesc();
 	entry->setName(name);
 	entry->formatName(fmt_desc);
-	if (!force && !fmt_desc.allow_duplicate_names)
-		entry->parentDir()->ensureUniqueName(entry);
+	// Disable (1) from appearing
+	/* if (!force && !fmt_desc.allow_duplicate_names)
+		entry->parentDir()->ensureUniqueName(entry); */
 	entry->setState(ArchiveEntry::State::Modified, true);
 
 	// Announce modification
@@ -1735,7 +1736,7 @@ bool Archive::loadFormats(MemChunk& mc)
 	fmt_folder.name                  = "Folder";
 	fmt_folder.names_extensions      = true;
 	fmt_folder.supports_dirs         = true;
-	fmt_folder.allow_duplicate_names = false;
+	fmt_folder.allow_duplicate_names = true;
 	formats_.push_back(fmt_folder);
 
 	return true;
